@@ -4,12 +4,16 @@ function Statistics ({good, bad, neutral}) {
   return (
     <>
     <h2>Statistics:</h2>
-    <p>Good: {good}</p>
-    <p>Neutral: {neutral}</p>
-    <p>Bad: {bad}</p>
-    <p>Total: {good + bad + neutral}</p>
-    <p>Average: {(good || bad || neutral) ? (bad*-1 + good)/(good + bad + neutral) : 0}</p>
-    <p>Percentage of positive feedback: {good ? good*100/(good+bad+neutral) : 0}%</p>
+    {(!good && !bad && !neutral) ? (<h3>No feedback given yet!</h3>) : (
+    <>
+      <p>Good: {good}</p>
+      <p>Neutral: {neutral}</p>
+      <p>Bad: {bad}</p>
+      <p>Total: {good + bad + neutral}</p>
+      <p>Average: {(good || bad || neutral) ? (bad*-1 + good)/(good + bad + neutral) : 0}</p>
+      <p>Percentage of positive feedback: {good ? good*100/(good+bad+neutral) : 0}%</p>
+    </>
+    )}
     </>
   )
 }
