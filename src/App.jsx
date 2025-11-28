@@ -8,7 +8,12 @@ function Button ({text, setter, value}) {
 
 function StatisticLine ({text, value}){
   return (
-    <p>{text}: {value}</p>
+    <table>
+      <tr>
+        <td>{text}: </td>
+        <td>{value}</td>
+      </tr>
+    </table>
   )
 }
 
