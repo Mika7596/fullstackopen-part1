@@ -1,17 +1,29 @@
 import { useState } from "react"
 
+function Button ({text, setter, value}) {
+  return (
+    <button onClick={() => setter(value + 1)}>{text}</button>
+  )
+}
+
+function StatisticLine ({text, value}){
+  return (
+    <p>{text}: {value}</p>
+  )
+}
+
 function Statistics ({good, bad, neutral}) {
   return (
     <>
     <h2>Statistics:</h2>
     {(!good && !bad && !neutral) ? (<h3>No feedback given yet!</h3>) : (
     <>
-      <p>Good: {good}</p>
-      <p>Neutral: {neutral}</p>
-      <p>Bad: {bad}</p>
-      <p>Total: {good + bad + neutral}</p>
-      <p>Average: {(good || bad || neutral) ? (bad*-1 + good)/(good + bad + neutral) : 0}</p>
-      <p>Percentage of positive feedback: {good ? good*100/(good+bad+neutral) : 0}%</p>
+      <StatisticLine text="Good" value={good}/>
+      <StatisticLine text="Bad" value={bad}/>
+      <StatisticLine text="Neutral" value={neutral}/>
+      <StatisticLine text="Total" value={good + bad + neutral}/>
+      <StatisticLine text="Average" value={(good || bad || neutral) ? (bad*-1 + good)/(good + bad + neutral) : 0}/>
+      <StatisticLine text="Percentage of positive feedback" value={`${good ? good*100/(good+bad+neutral) : 0}%`}/>
     </>
     )}
     </>
@@ -30,9 +42,9 @@ function App() {
     <>
     <h1>Unicafe feedback collection</h1>
     <h2>Give feedback!</h2>
-    <button onClick={() => setGood(good + 1)}>Good!</button>
-    <button onClick={() => setNeutral(neutral + 1)}>Neutral -_-</button>
-    <button onClick={() => setBad(bad + 1)}>Bad :/</button>
+    <Button text="Good!" value={good} setter={setGood}></Button>
+    <Button text="Neutral -_-" setter={setNeutral} value={neutral}/>
+    <Button text= "Bad :/" value={bad} setter={setBad} />
     <Statistics good={good} bad={bad} neutral={neutral}></Statistics>
     </>
   )
