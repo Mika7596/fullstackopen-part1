@@ -19,16 +19,20 @@ function App() {
   const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));
   const handleVote = () => {
     const clone = [...votes];
-    clone[selected] ++
-    setVotes(clone)
+    clone[selected] ++;
+    setVotes(clone);
   }
   
   return (
     <>
+    <h2>Anecdote of the day</h2>
       <div>{anecdotes[selected]}</div>
       <button onClick={handleVote}>Vote this anecdote</button>
       <button onClick={handleClick}>Tell me another anecdote!</button>
       <div>This anecdote has been voted {votes[selected]} times</div>
+      <hr></hr>
+      <h2>Anecdote with most votes</h2>
+      {votes.reduce((a, b) => a+b) == 0 ? <p>No anecdotes voted yet</p> :<p>{anecdotes[votes.indexOf(Math.max(...votes))]} has {Math.max(...votes)} votes</p> }
     </>
   );
 }
